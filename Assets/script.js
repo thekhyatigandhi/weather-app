@@ -18,8 +18,14 @@ let getWeatherByCityName = async (city) => {
   let endpoint = weatherBaseEndPoint + "&q=" + city;
   let response = await fetch(endpoint);
   let weather = await response.json();
-
-  console.log(weather);
+  return weather;
 };
 
 getWeatherByCityName("New York");
+
+searchInp.addEventListener("keydown", async (e) => {
+  if (e.keyCode === 13) {
+    let weather = await getWeatherByCityName(searchInp.value);
+    console.log(weather);
+  }
+});
