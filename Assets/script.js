@@ -25,7 +25,22 @@ getWeatherByCityName("New York");
 
 searchInp.addEventListener("keydown", async (e) => {
   if (e.keyCode === 13) {
+    // 13 bcause they keycode for Enter key is 13
     let weather = await getWeatherByCityName(searchInp.value);
-    console.log(weather);
+    updateCurrentWeather(weather);
   }
 });
+
+let updateCurrentWeather = (data) => {
+  city.textContent = data.name + "," + data.sys.country;
+  day.textContent = dayOfWeek();
+};
+
+let dayOfWeek = () => {
+  return new Date().toLocaleDateString("en-EN", {
+    weekday: "long",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+};
