@@ -5,7 +5,7 @@ let temperature = document.querySelector(
   ".weather_indicator--temperature>.value"
 );
 let wind = document.querySelector(".weather_indicator--wind>.value");
-let humidity = document.querySelector(".weather_indicator--temperature>.value");
+let humidity = document.querySelector(".weather_indicator--humidity>.value");
 let image = document.querySelector(".weather_image");
 let weatherAPIKey = "754ecc599661b8b35214b8ac0f447f7f"; // generated using openweathermap.org
 let weatherBaseEndPoint =
@@ -32,8 +32,12 @@ searchInp.addEventListener("keydown", async (e) => {
 });
 
 let updateCurrentWeather = (data) => {
+  console.log(data);
   city.textContent = data.name + "," + data.sys.country;
   day.textContent = dayOfWeek();
+  humidity.textContent = data.main.humidity;
+  temperature.textContent = data.main.temp;
+  wind.textContent = data.wind.speed;
 };
 
 let dayOfWeek = () => {
