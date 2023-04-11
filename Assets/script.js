@@ -9,7 +9,7 @@ const weatherWind = document.querySelector(".weather_indicator--wind .value");
 const weatherHumidity = document.querySelector(
   ".weather_indicator--humidity .value"
 );
-const weatherIcon = document.querySelector(".weather_image");
+const weatherImage = document.querySelector(".weather_image");
 const weatherForcastItems = document.querySelectorAll(".weather_forcast_item");
 
 // OpenWeatherMap API Key
@@ -41,6 +41,9 @@ searchInput.addEventListener("keypress", async (event) => {
       ).toFixed(2)}°C`;
       weatherWind.textContent = `${currentWeatherData.wind.speed}mph`;
       weatherHumidity.textContent = `${currentWeatherData.main.humidity}%`;
+      let weatherIcon = currentWeatherData.weather[0].icon;
+      let weatherImageUrl = `https://openweathermap.org/img/w/${weatherIcon}.png`;
+      weatherImage.src = weatherImageUrl;
 
       // Update DOM with forecast data
       for (let i = 0; i < weatherForcastItems.length; i++) {
@@ -59,13 +62,13 @@ searchInput.addEventListener("keypress", async (event) => {
           forecastDate.toLocaleDateString();
         forecastItem.querySelector(
           ".weather_forcast_temp .value"
-        ).textContent = `${(forecastTemp - 273.15).toFixed(2)}°C`;
+        ).textContent = `Temp: ${(forecastTemp - 273.15).toFixed(2)}°C`;
         forecastItem.querySelector(
           ".weather_forcast_wind .value"
-        ).textContent = `${forecastWind}mph`;
+        ).textContent = `Wind: ${forecastWind}mph`;
         forecastItem.querySelector(
           ".weather_forcast_humidity .value"
-        ).textContent = `${forecastHumidity}%`;
+        ).textContent = `Humidity: ${forecastHumidity}%`;
       }
     }
   }
