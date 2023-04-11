@@ -23,22 +23,20 @@ searchInput.addEventListener("keypress", async (event) => {
     if (city) {
       // Fetch current weather data
       const currentWeatherResponse = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
       );
       const currentWeatherData = await currentWeatherResponse.json();
 
       // Fetch 5-day forecast data
       const forecastResponse = await fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`
+        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`
       );
       const forecastData = await forecastResponse.json();
 
       // Update DOM with current weather data
       weatherCity.textContent = currentWeatherData.name;
       weatherDay.textContent = new Date().toLocaleDateString();
-      weatherTemp.textContent = `${(
-        currentWeatherData.main.temp - 273.15
-      ).toFixed(2)}°C`;
+      weatherTemp.textContent = `${currentWeatherData.main.temp.toFixed(2)}°C`;
       weatherWind.textContent = `${currentWeatherData.wind.speed}mph`;
       weatherHumidity.textContent = `${currentWeatherData.main.humidity}%`;
       let weatherIcon = currentWeatherData.weather[0].icon;
@@ -62,7 +60,7 @@ searchInput.addEventListener("keypress", async (event) => {
           forecastDate.toLocaleDateString();
         forecastItem.querySelector(
           ".weather_forcast_temp .value"
-        ).textContent = `Temp: ${(forecastTemp - 273.15).toFixed(2)}°C`;
+        ).textContent = `Temp: ${forecastTemp.toFixed(2)}°C`;
         forecastItem.querySelector(
           ".weather_forcast_wind .value"
         ).textContent = `Wind: ${forecastWind}mph`;
