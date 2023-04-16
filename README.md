@@ -16,7 +16,7 @@ The link to the deployed page - https://thekhyatigandhi.github.io/weather-app/
 
 The following animation shows the web application's appearance and functionality:
 
-![portfolio demo](./Assets/multiple-choice-quiz.gif)
+![portfolio demo](./Assets/Images/Project%20GIF.gif)
 
 ## Technologies Used
 

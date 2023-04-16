@@ -11,7 +11,6 @@ const weatherHumidity = document.querySelector(
 );
 const weatherImage = document.querySelector(".weather_image");
 const weatherForcastItems = document.querySelectorAll(".weather_forcast_item");
-
 // OpenWeatherMap API Key
 const apiKey = "754ecc599661b8b35214b8ac0f447f7f";
 
@@ -68,6 +67,23 @@ searchInput.addEventListener("keypress", async (event) => {
           ".weather_forcast_humidity .value"
         ).textContent = `Humidity: ${forecastHumidity}%`;
       }
+
+      const searchedCities = localStorage.getItem("searchedCities")
+        ? JSON.parse(localStorage.getItem("searchedCities"))
+        : [];
+      if (!searchedCities.includes(city)) {
+        searchedCities.push(city);
+        localStorage.setItem("searchedCities", JSON.stringify(searchedCities));
+      }
     }
   }
+});
+
+// Retrieve searched cities from local storage on page load
+window.addEventListener("load", () => {
+  const searchedCities = localStorage.getItem("searchedCities")
+    ? JSON.parse(localStorage.getItem("searchedCities"))
+    : [];
+  // Do whatever you want with the retrieved searched cities here
+  console.log(searchedCities);
 });
